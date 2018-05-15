@@ -79,20 +79,6 @@ if (isset($_POST['submit']))
         $id = $data[$z];           
         $i=$i+1;        
     }      
-    
-
-    //$logtrue = "test";
-    //$passtrue = "123";
-    //if($login == $logtrue && $passtrue == $pass )
-    //{   // перенаправление на нужную страницу
-    //    header ('Location: auth.php');  
-        // прерываем работу скрипта, чтобы забыл о прошлом
-    //    exit();    
-   // }
-    //else
-    //{
-    //    echo "Неправильно введен логин или пароль";
-    //}
 }
 ?>
 </body></html>
