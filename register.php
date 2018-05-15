@@ -1,19 +1,20 @@
-<?php 
+<!--//php 
     // Открыть файл для чтения и прочитать строку
-    echo "База даных: ";
-    $f = fopen("userbd.html", "r");
-    echo fgets($f); 
-    echo "<BR>";
-?>
+    //echo "База даных: ";
+    //$f = fopen("userbd.html", "r");
+    //echo fgets($f); 
+    //echo "<BR>"; -->
+
 <?php   // Страница регситрации нового пользователя        
         //  echo gettype($login); 
         // 1|User123|pass123|2|User456|pass456|3|User789|pass789
         // 1|User111|pass111|2|User222|pass222|3|User333|pass333
         // 1|User111|pass111|2|User222|pass222|3|User333|pass333|4|User444|pass444|5|User555|pass555
- 
+
+// Если нажали на кнопку - Запись тестовых данных
 if(isset($_POST['test'])) 
 {
-    // Очистка БД
+    
     $f = fopen("userbd.html", "w");
     fwrite($f, "1|User111|pass111|2|User222|pass222|3|User333|pass333"); 
     
@@ -21,9 +22,10 @@ if(isset($_POST['test']))
     $f = fopen("userbd.html", "r");
     echo fgets($f); 
 }    
+
+// Если нажали на кнопку - Очистка БД
 if(isset($_POST['clear'])) 
 {
-    // Очистка БД
 	$f = fopen("userbd.html", "w");
     fwrite($f, ""); 
     
@@ -31,11 +33,13 @@ if(isset($_POST['clear']))
     $f = fopen("userbd.html", "r");
 	echo fgets($f); 
 }
+
+// Если нажали на кнопку - Зарегистрироваться
 if(isset($_POST['submit'])) 
 {
     $err = array();
     //Проверки:
-    # 1. Проверям логин
+    # 1. Проверям логин 
     if(!preg_match("/^[a-zA-Z0-9]+$/",$_POST['login']))
     { 
         $err[] = "Логин может состоять только из букв английского алфавита и цифр";
@@ -53,36 +57,41 @@ if(isset($_POST['submit']))
     
     echo "<b>Исходная База данных (строка):</b> ";
     $f = file_get_contents("userbd.html");     
-    echo $f; echo "<br><br> Разбиваем строку:<br>";    
+    echo $f; 
+
+    $user = $_POST['login'];
+    $password = $_POST['password'];
+    echo "<br>Ввели с клавиатуры:<br>"; 
+    echo "User=";    echo $user; echo "<br>";
+    echo "Password=";   echo $password; echo "<br>";   
+
+    echo "<br><br> Разбиваем строку:<br>";    
     $data = ( explode( '|', $f ) );
     
     echo "Количество элементов массива: ";
     $kol=count($data);
     //echo gettype($kol);
-
     echo "kol="; echo $kol;echo "<br>";
-    // 3 - кол-во свойств для одного пользователя    
-    $k=$kol/3;    
     
+    // 3 - кол-во пользователей    
+    $k=$kol/3;        
     echo "Кол-во пользователей ";     echo "k="; echo $k; echo "<br>"; 
     $z=0;
-    $i=1; 
-    $user = $_POST['login'];
-    echo "Ввели с клавиатуры User=";    echo $user; echo "<br>";
+    $i=1;    
     
     while ($i <= $k)
     {
-        //Шаг1
+        //Шаг1 ID
         echo "<br>Строка =";  echo $i;  echo "<br>";              
         echo $z ; echo " ID="; echo $data[$z]; echo "<br>";
         $z=$z+1;        
-        //Шаг2
+        //Шаг2 USER
         echo $z ; echo " USER="; echo $data[$z]; $login = $data[$z] ; $z=$z+1;        
         if( $login == $user)
         {  
             echo " Пользователь с именем ". $user. " уже существует: ";        
         }
-        //Шаг3
+        //Шаг3 LOGIN
         echo "<br>";echo $z; echo " LOGIN="; echo $data[$z];         
         $z=$z+1;
         $login = $data[$z];
@@ -99,9 +108,7 @@ if(isset($_POST['submit']))
         $login = $_POST['login'];       
 
         // Открыть текстовый файл
-        $f = "userbd.html";
-        // Записать текст
-        //fwrite($f, $_POST['login'] );       
+        $f = "userbd.html";     
          
         //file_put_contents(куда пишем, что пишем); 3-й параметр FILE_APPEND
         // чтобы повторные вызовы file_put_contents не удаляли содержимое файла,         
@@ -118,9 +125,9 @@ if(isset($_POST['submit']))
         echo "Логин: ";           echo  $login;  
         echo " <br>Ваш пароль: "; echo  $password;
         
-        //echo "<br><b>База данных на выходе:</b> ";
-        //$f = fopen("userbd.html", "r");
-	    //echo fgets($f); 
+        echo "<br><b>База данных на выходе:</b> ";
+        $f = fopen("userbd.html", "r");
+	    echo fgets($f); 
     }
     else    
     {
@@ -135,12 +142,13 @@ if(isset($_POST['submit']))
 
 <form method="POST">
     
-    <h3>Форма регистрации</h3>
+    <h2>Форма регистрации</h2>
     <p>Придумайте логин и пароль. </p>
     Логин: <input name="login" type="text"><br><br>
     Пароль: <input name="password" type="password"><br><br>
-    <input name="submit" type="submit" value="Зарегистрироваться">
     
-    <input name="clear" type="submit" value="Очистить БД">
+    <input name="submit" type="submit" value="Зарегистрироваться">
+        <input name="clear" type="submit" value="Очистить БД">
     <input name="test" type="submit" value="Заменить на тестовые данные">
 </form>
+<a href="FAQ.php">К форме входа на сайт</a>
