@@ -142,7 +142,7 @@
     }*/
 </style> </br>
 <ul>
-    <li><a href="/FAQ.html">вернуться к справке</a></li>
+    <li><a href="/FAQ.php">вернуться к справке</a></li>
     <li><a href="/textfile.html">Посмотреть textfile.html</a></li>
     <li><a href="/bdtest.json">Посмотреть bdtest.json</a></li>
 </ul>
