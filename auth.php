@@ -6,20 +6,13 @@
 <style>
 .del { display: none; }
 .del:not(:checked) + label + * { display: none; } 
-
 /* вид CSS кнопки */
 .del:not(:checked) + label,
 .del:checked + label {
   display: inline-block;
-  padding: 2px 10px;
-  /*border-radius: 2px;
-  color: #fff;
-  background: #4e6473;
-  cursor: pointer;*/
+  padding: 2px 10px; 
 }
-/*.del:checked + label {
-  background: #e36443;
-}*/
+/*.del:checked + label */
 </style> 
 <h2>Вход выполнен</h2>
 <?php session_start(); $login = $_SESSION['login'];?>
@@ -28,13 +21,9 @@
 <button><a href="/send3.php">Задать вопрос</a></button>
 <button><a href="/index.php">Выйти</a></button>
 <!--button><a href="/register.php">Зарегистрироваться</a></button-->
-
-
-
 <hr>
 
 <input type="checkbox" id="raz" class="del"> 
-
 <label for="raz" class="del">
     1. Как мне установить XAMPP?
 </label>
@@ -46,7 +35,6 @@
     <p>sudo ./xampp-linux-*-installer.run</p>        
     <p>Вот и всё. XAMPP теперь установлен под каталогом /opt/lampp.</p>    
 </div><br>
-
 
 <input type="checkbox" id="raz2" class="del"> 
     <label for="raz2" class="del">
@@ -83,8 +71,6 @@
 </div><br>
 <br>
 <hr>
-
 <br><br>
-
 </body>
 </html>
