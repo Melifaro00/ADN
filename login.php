@@ -10,8 +10,6 @@
     <input type="password" name="pass" placeholder="Пароль"><br><br>
     <input type="submit" name="submit" placeholder="Войти"><br>
 </form>
-
-
 <?php 
     // 1|user111|Y0dGemN6RXhNUT09|2|user222|Y0dGemN6SXlNZz09|3|user333|Y0dGemN6TXpNdz09|4|user444|Y0dGemN6UTBOQT09
     //  1|User111|pass111|2|User222|pass222|3|User333|pass333       
@@ -20,13 +18,10 @@
     //$f=serialize($f);
     //echo $f; echo "<br><br>";
     //$f=unserialize($f);
-    //echo $f;echo "<br><br>";
-  
-    $data = ( explode( '|', $f ) ); // Разбиваем строку   
-    
+    //echo $f;echo "<br><br>";  
+    $data = ( explode( '|', $f ) ); // Разбиваем строку       
     //echo "Количество элементов массива: ";
-    $kol=count($data); //echo "kol="; echo $kol;echo "<br>";
-    
+    $kol=count($data); //echo "kol="; echo $kol;echo "<br>";    
     //echo "Кол-во пользователей ";
     $k=$kol/3;  // echo "k=";   echo $k;  echo "<br>";     
     $z=0;
@@ -34,15 +29,14 @@
 if (isset($_POST['submit']))
 {
     $login = $_POST['login'];
-    $pass = $_POST['pass'];
-    
+    $pass = $_POST['pass'];    
     //echo "Ввели с клавиатуры:"; echo " User="; echo $login; echo "<br>"; echo " Password="; echo $pass; echo "<br>";
     while ($i <= $k)
     {
         //Шаг1 ID
         //echo "<br>Строка =";  echo $i;  echo "<br>";              
         //echo $z ; echo " ID="; echo $data[$z]; echo "<br>";
-        $z=$z+1;        
+        $z=$z+1;
         
         //Шаг2 LOGIN
         //echo $z ; echo " USER="; echo $data[$z]; echo $login;
@@ -76,4 +70,5 @@ if (isset($_POST['submit']))
     }      
 }
 ?>
-</body></html>
+</body>
+</html>
