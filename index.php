@@ -12,15 +12,9 @@
 .del:not(:checked) + label,
 .del:checked + label {
   display: inline-block;
-  padding: 2px 10px;
-  /*border-radius: 2px;
-  color: #fff;
-  background: #4e6473;
-  cursor: pointer;*/
+  padding: 2px 10px;  
 }
-/*.del:checked + label {
-  background: #e36443;
-}*/
+/*.del:checked + label {}*/
 </style> 
 <button><a href="/send3.php">Задать вопрос</a></button>
 <button><a href="/login.php">Войти на сайт</a></button>
