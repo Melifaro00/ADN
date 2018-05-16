@@ -1,39 +1,14 @@
-<!--//php 
-    // Открыть файл для чтения и прочитать строку
-    //echo "База даных: ";
-    //$f = fopen("userbd.html", "r");
-    //echo fgets($f); 
-    //echo "<BR>"; -->
+<form method="POST">    
+    <h2>Форма регистрации</h2>    
+    <p>Логин:  <input name="login" type="text"><br><br>
+    Пароль: <input name="password" type="password"><br><br>  
+    <input name="submit" type="submit" value="Зарегистрироваться"></p>  
+</form>
+<a href="index.php">К форме входа на сайт</a><br><br>
 
-<?php   // Страница регситрации нового пользователя        
-        //  echo gettype($login); 
-        // 1|User123|pass123|2|User456|pass456|3|User789|pass789
-        // 1|User111|pass111|2|User222|pass222|3|User333|pass333
-        // 1|User111|pass111|2|User222|pass222|3|User333|pass333|4|User444|pass444|5|User555|pass555
-
-// Если нажали на кнопку - Запись тестовых данных
-if(isset($_POST['test'])) 
-{
-    
-    $f = fopen("userbd.html", "w");
-    fwrite($f, "1|User111|pass111|2|User222|pass222|3|User333|pass333"); 
-    
-    //echo "<b>База данных:</b> ";
-    $f = fopen("userbd.html", "r");
-    echo fgets($f); 
-}    
-
-// Если нажали на кнопку - Очистка БД
-if(isset($_POST['clear'])) 
-{
-	$f = fopen("userbd.html", "w");
-    fwrite($f, ""); 
-    
-    //echo "<b>База данных:</b> ";
-    $f = fopen("userbd.html", "r");
-	echo fgets($f); 
-}
-
+<?php   // Регситрации нового пользователя                
+        // 1|user111|Y0dGemN6RXhNUT09|2|user222|Y0dGemN6SXlNZz09|3|user333|Y0dGemN6TXpNdz09|4|user444|Y0dGemN6UTBOQT09
+        //  1|User111|pass111|2|User222|pass222|3|User333|pass333  
 // Если нажали на кнопку - Зарегистрироваться
 if(isset($_POST['submit'])) 
 {
@@ -51,104 +26,57 @@ if(isset($_POST['submit']))
     if(strlen($_POST['password']) < 6 or strlen($_POST['password']) > 30)  
     {
         $err[] = "Пароль должен быть не меньше 6-х символов и не больше 30";
-    }
-    # 2. проверяем, не сущестует ли пользователя с таким именем
-    // функция file_get_contents - позволяет произвести чтение файла в строку
+    }        
+    $login = $_POST['login']; // Получили логин и пароль с формы
+    $password = $_POST['password'];   
     
-    echo "<b>Исходная База данных (строка):</b> ";
-    $f = file_get_contents("userbd.html");     
-    echo $f; 
-
-    $user = $_POST['login'];
-    $password = $_POST['password'];
-    echo "<br>Ввели с клавиатуры:<br>"; 
-    echo "User=";    echo $user; echo "<br>";
-    echo "Password=";   echo $password; echo "<br>";   
-
-    echo "<br><br> Разбиваем строку:<br>";    
-    $data = ( explode( '|', $f ) );
+    $f = file_get_contents("userbd.html");   
+    $data = ( explode( '|', $f ) );        // Разбиваем строку       
+    $kol=count($data);                     // Количество элементов массива
+    $k=$kol/3;                             // Кол-во пользователей        
+    $z=0;                                  // Текущий элемент массива 
+    $i=1;                                  // Бегунок № пользователя
     
-    echo "Количество элементов массива: ";
-    $kol=count($data);
-    //echo gettype($kol);
-    echo "kol="; echo $kol;echo "<br>";
-    
-    // 3 - кол-во пользователей    
-    $k=$kol/3;        
-    echo "Кол-во пользователей ";     echo "k="; echo $k; echo "<br>"; 
-    $z=0;
-    $i=1;    
-    
-    while ($i <= $k)
+    while ($i <= $k)  // 2. Сущестует ли пользователь с таким именем ?
     {
-        //Шаг1 ID
-        echo "<br>Строка =";  echo $i;  echo "<br>";              
-        echo $z ; echo " ID="; echo $data[$z]; echo "<br>";
+        //Шаг1 ID         
         $z=$z+1;        
-        //Шаг2 USER
-        echo $z ; echo " USER="; echo $data[$z]; $login = $data[$z] ; $z=$z+1;        
-        if( $login == $user)
-        {  
-            echo " Пользователь с именем ". $user. " уже существует: ";        
-        }
-        //Шаг3 LOGIN
-        echo "<br>";echo $z; echo " LOGIN="; echo $data[$z];         
+        //Шаг2 LOGIN        
+        if( $_POST['login'] == $data[$z] )
+        {   
+            $err[] = "Пользователь с таким именем уже существует. <br>"; 
+            break;        
+        }        
+        $z=$z+1;    
+        //Шаг3 LOGIN        
         $z=$z+1;
-        $login = $data[$z];
-        echo "<br>"; 
+        $login = $data[$z];        
         $id = $data[$z];           
         $i=$i+1;
     }      
-    if( $login == $_POST['login'])
-    {
-        $err[] = "Пользователь с таким именем". $login. "уже существует: <br>";        
-    }
     # 3. Если нет ошибок, то добавляем в БД нового пользователя
-    if(count($err) == 0)  {         
-        $login = $_POST['login'];       
-
-        // Открыть текстовый файл
-        $f = "userbd.html";     
-         
-        //file_put_contents(куда пишем, что пишем); 3-й параметр FILE_APPEND
-        // чтобы повторные вызовы file_put_contents не удаляли содержимое файла,         
+    if(count($err) == 0)  
+    {         
+        $login = $_POST['login']; 
+        $f = "userbd.html"; // Открыть текстовый файл     
         $k=$k+1;
-        file_put_contents($f, "|".$k, FILE_APPEND);
-        file_put_contents($f, "|".$login, FILE_APPEND);
+        file_put_contents($f, "|".$k, FILE_APPEND);        // file_put_contents(куда пишем, что пишем); 3-й параметр FILE_APPEND
+        file_put_contents($f, "|".$login, FILE_APPEND);    // чтобы повторные вызовы file_put_contents не удаляли содержимое файла,                       
         
-        # Убираем лишние пробелы и делаем двойное шифрование
-        $password = trim($_POST['password']);   
-        //$password = md5(md5(trim($_POST['password']));   
-        file_put_contents($f, "|".$password, FILE_APPEND);
+        $password = base64_encode(base64_encode(trim($_POST['password'])));    // Убираем лишние пробелы и делаем двойное шифрование    
+        file_put_contents($f, "|".$password, FILE_APPEND);    
+        
+        session_start();
+        $_SESSION['login'] = $login;    
 
         echo "<br>Новый пользователь успешно создан: <br>";
-        echo "Логин: ";           echo  $login;  
-        echo " <br>Ваш пароль: "; echo  $password;
-        
-        echo "<br><b>База данных на выходе:</b> ";
-        $f = fopen("userbd.html", "r");
-	    echo fgets($f); 
     }
     else    
-    {
-        print "<br><b>При регистрации произошли следующие ошибки:</b><br>";
+    {        
         foreach($err AS $error)
         {
             print $error."<br>";
         }
-    }    
+    }       
 }
 ?>
-
-<form method="POST">
-    
-    <h2>Форма регистрации</h2>
-    <p>Придумайте логин и пароль. </p>
-    Логин: <input name="login" type="text"><br><br>
-    Пароль: <input name="password" type="password"><br><br>
-    
-    <input name="submit" type="submit" value="Зарегистрироваться">
-        <input name="clear" type="submit" value="Очистить БД">
-    <input name="test" type="submit" value="Заменить на тестовые данные">
-</form>
-<a href="FAQ.php">К форме входа на сайт</a>

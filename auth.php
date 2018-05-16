@@ -2,9 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Untitled Document</title>
 </head>
-
 <body>
-
 <style>
 .del { display: none; }
 .del:not(:checked) + label + * { display: none; } 
@@ -24,16 +22,22 @@
 }*/
 </style> 
 <h2>Вход выполнен</h2>
-<?php echo "Привет, ".$login = $_POST['login'];?> <br>
+<?php session_start(); $login = $_SESSION['login'];?>
+<?php echo "Привет, $login" ?> <br><br>
 
 <button><a href="/send3.php">Задать вопрос</a></button>
-<hr>
+<button><a href="/index.php">Выйти</a></button>
+<!--button><a href="/register.php">Зарегистрироваться</a></button-->
+
+
+
 <hr>
 
 <input type="checkbox" id="raz" class="del"> 
-    <label for="raz" class="del">
-        1. Как мне установить XAMPP?
-    </label>
+
+<label for="raz" class="del">
+    1. Как мне установить XAMPP?
+</label>
 <div>
     <p>Выберите ващу операционную систему и 32 или 64 битную версию.</p>
     <p>Измените разрешения для установщика</p>        
@@ -81,8 +85,6 @@
 <hr>
 
 <br><br>
-<a href="/FAQ.php">вернуться к авторизации</a>
-<a href="/register.php">Зарегистрироваться</a>
 
 </body>
 </html>
