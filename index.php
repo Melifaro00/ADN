@@ -25,10 +25,7 @@
 <button><a href="/send3.php">Задать вопрос</a></button>
 <button><a href="/login.php">Войти на сайт</a></button>
 <button><a href="/register.php">Зарегистрироваться</a></button>
-
-
-  <hr>
-
+<hr>
 <input type="checkbox" id="raz" class="del"> 
 <label for="raz" class="del">1. Как мне установить XAMPP?</label>
 <div> Для простмотра войдите на сайт </div><br>
@@ -40,6 +37,5 @@
 <input type="checkbox" id="raz3" class="del"> 
 <label for="raz3" class="del">3. Как я мне остановить XAMPP?</label>
 <div> Для простмотра войдите на сайт </div><br>
-
-
-</body></html>
+</body>
+</html>
