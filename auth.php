@@ -86,9 +86,85 @@
         <p>cd /opt/lampp</p> 
         <p>sudo ./manager-linux.run (or manager-linux-x64.run)</p>
     </div><br>
-    <br>
+
+     <input type="checkbox" id="raz4" class="del"> 
+        <label for="raz4" class="del">
+        4. Дан массив из 4х элементов PHP,Java,Ci,Ci++. Написать программу меняющую местами ключи и значения.
+        </label>
+    <div>
+    <?php echo "        
+        < ? php <br>
+            $ input = array( PHP, Java, Ci,Ci++);//поставь 2х кавычки и убери пробел перед $ и ?<br>
+            $ flipped = array_flip($ input);//$<br> 
+            print_r($ flipped);//$<br>
+        ? >        ";
+    ?>
+    </div>
+    <input type="checkbox" id="raz5" class="del"> 
+        <label for="raz5" class="del">
+            5. Даны 2-е строки "Понятие языка программирования" и "Архитектура клиент-сервер".
+               Построить 2-а массива в котором ключами являются буквы алфавита, а значения количество букв в строке"
+        </label>
+    <div>
+         <?php echo "        
+            <br>//поставь 2х кавычки и убери пробел перед $ и ?<br><br>
+            < ? php <br><br>
+                $ str1 =  Понятие языка программирования;<br>
+                $ str2 = Архитектура клиент-сервер;<br><br>
+                
+                $ dlina1 = strlen($ str1);<br>
+                echo длина строки1 =; echo strlen($ str1);<br><br>
+
+                $ dlina2 = strlen($ str2);<br>
+                echo длина строки2 =; echo strlen($ str2);<br><br>
+                
+                $ str1 = str_split($ str1);<br>
+                $ str2 = str_split($ str2);<br><br>
+                
+                // формируем массивы из строк<br>
+                $ str1 = explode(", ", $ str1); 
+                $ str2 = explode(", ", $ str2);<br><br>
+
+                // Меняем местами ключи с их значениями в массиве<br>
+                $ str1 = array_flip($ str1);//$<br> 
+                $ str2 = array_flip($ str2);//$<br> <br>
+
+                
+                i=0;<br>
+                while ($ i <= $ str1) <br>
+                {<br>
+                    $ arr[i]= $ dlina1;<br>
+                }<br>
+
+                k=0;<br>
+                while ($ k <= $ str1) <br>
+                {<br>
+                    $ arr[k]= $ dlina2;<br>
+                }<br>
+
+                echo $ str1;<br>
+                echo $ str2;<br>
+                
+            ? >        ";
+        ?>
+    </div><br>
+
+
+
+
+
+
+
+    <input type="checkbox" id="raz6" class="del"> 
+        <label for="raz6" class="del">
+            6. Даны 2-а массива из ключей массивов построить массив как результат их пересечения (ключи с нулевым количеством букв не учитывать)
+               
+        </label>
+    <div>
+        ...
+    </div><br>
     <hr>
-    <br><br>
+    
     <?php 
     }
     else
@@ -97,7 +173,5 @@
         exit(); 
     }
 ?>
-
-
 </body>
 </html>

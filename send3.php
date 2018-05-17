@@ -37,7 +37,9 @@
     $fio = $_POST['fio'];
     $email = $_POST['email'];
     $message = $_POST['message'];           
-    
+    $emailadmin='buyanov@adn.agency';
+    $to=$email.', '.$emailadmin;
+    //echo $to;
     // Генерация пароля
     $chars="abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ-_"; // Допустимые символы, в пароле. 
     $max=10; // Количество символов в пароле.         
@@ -53,7 +55,7 @@
     if (mail("Melifaro00@yandex.ru", 
             "Тема: Заявка с сайта",  
             "<br>ФИО: ".$fio.
-            "<br>E-mail: ".$email.
+            "<br>E-mail: ".$to.
             "<br>Сообщение".$message.
             "<br>Пароль:".$password ,
             "From: Melifaro12@mail.ru \r\n"))
@@ -71,7 +73,16 @@
         // 3. удалим пробелы с начала и конца строки
         $fio = trim($fio); 
         $email = trim($email);
-        $message = trim($message);             
+        $message = trim($message);      
+        
+        $fio = base64_encode ($fio);
+        $email = base64_encode ($email);
+        $message = base64_encode ($message);
+
+        $fio = serialize($fio);
+        $email = serialize($email);
+        $message = serialize($message);
+        
     } 
 ?>
 <style>
